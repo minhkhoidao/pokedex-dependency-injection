@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"poke-go/pkg/controllers"
-	"poke-go/pkg/services"
+	"github.com/minhkhoidao/pokedex-dependency-injection/pkg/controllers"
+	"github.com/minhkhoidao/pokedex-dependency-injection/pkg/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +13,9 @@ func RegisterPokemonRoutes(router *gin.Engine, service *services.PokemonService)
 	pokemonGroups := router.Group("/pokemon")
 
 	{
+		pokemonGroups.GET("/", controller.GetListPokemon)
+		pokemonGroups.GET("/:id", controller.GetPokemonById)
 		pokemonGroups.POST("/create", controller.CreatePokemon)
+		pokemonGroups.PUT("/update/:id", controller.UpdatePokemon)
 	}
 }
